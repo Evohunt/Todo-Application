@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import todo.Database.DatabaseHandler;
+import todo.model.User;
 
 public class RegisterController {
 
@@ -33,17 +34,34 @@ public class RegisterController {
     @FXML
     void initialize() {
 
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-
         registerRegisterButton.setOnAction(event -> {
 
-            databaseHandler.signUpUser(registerFirstName.getText(),
-                    registerLastName.getText(),
-                    registerUsername.getText(),
-                    registerPassword.getText(),
-                    "Male");
+            createUser();
 
         });
+
+    }
+
+    private void createUser() {
+
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+
+        String firstName = registerFirstName.getText();
+        String lastName = registerLastName.getText();
+        String userName = registerUsername.getText();
+        String password = registerPassword.getText();
+
+        String gender = "";
+        if (registerMaleCheckBox.isSelected()) {
+            gender = "Male";
+        } else if (registerFemaleCheckBox.isSelected()) {
+            gender = "Female";
+        }
+
+        User user = new User(firstName, lastName, userName, password, gender);
+
+        databaseHandler.signUpUser(user);
+
 
     }
 

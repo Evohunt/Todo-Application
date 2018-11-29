@@ -3,15 +3,18 @@ package todo.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import todo.Database.DatabaseHandler;
+import todo.model.User;
 
 
 public class LoginController {
@@ -34,11 +37,39 @@ public class LoginController {
     @FXML
     private JFXButton loginRegisterButton;
 
+    private DatabaseHandler databaseHandler;
+
     @FXML
     void initialize() {
 
-        String loginText = loginUsername.getText().trim();
-        String loginPwd = loginPassword.getText().trim();
+        databaseHandler = new DatabaseHandler();
+
+        loginLoginButton.setOnAction(event -> {
+
+            String loginText = loginUsername.getText().trim();
+            String loginPwd = loginPassword.getText().trim();
+
+            User user = new User();
+            user.setUserName(loginText);
+            user.setPassword(loginPwd);
+
+            ResultSet userRow = databaseHandler.getUser(user);
+            int counter = 0;
+            try {
+
+                while (userRow.next()) {
+                    counter++;
+                }
+
+                if (counter == 1) {
+                    System.out.println("Login successful!");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        });
 
         loginRegisterButton.setOnAction(event -> {
 
@@ -57,23 +88,9 @@ public class LoginController {
 
         });
 
-        loginLoginButton.setOnAction(event -> {
-
-            if (!loginText.equals("") || !loginPwd.equals("")) {
-                loginUser(loginText, loginPwd);
-            } else {
-                System.out.println("Error logging in");
-            }
-
-        });
 
     }
 
-    private void loginUser(String userName, String password) {
 
-        // Check in the database if the user exists
-
-
-    }
 
 }

@@ -1,9 +1,7 @@
 package todo.Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import todo.model.User;
+import java.sql.*;
 
 public class DatabaseHandler extends Configs {
 
@@ -16,7 +14,7 @@ public class DatabaseHandler extends Configs {
         return dbConnection;
     }
 
-    public void signUpUser(String firstName, String lastName, String userName, String password, String gender) {
+    public void signUpUser(User user) {
 
         String insert = "INSERT INTO " + Const.USERS_TABLE + "(" + Const.USERS_FIRSTNAME
                 + ", " + Const.USERS_LASTNAME
@@ -27,11 +25,11 @@ public class DatabaseHandler extends Configs {
         try {
 
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, userName);
-            preparedStatement.setString(4, password);
-            preparedStatement.setString(5, gender);
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getUserName());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getGender());
 
             preparedStatement.executeUpdate();
 
@@ -39,6 +37,38 @@ public class DatabaseHandler extends Configs {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public ResultSet getUser(User user) {
+
+        ResultSet resultSet = null;
+
+        if (!user.getUserName().equals("") || !user.getPassword().equals("")) {
+
+            String query = "SELECT * FROM " + Const.USERS_TABLE + " WHERE "
+                    + Const.USERS_USERNAME + "=?" + " AND " + Const.USERS_PASSWORD
+                    + "=?";
+
+            try {
+
+                PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+                preparedStatement.setString(1, user.getUserName());
+                preparedStatement.setString(2, user.getPassword());
+
+                resultSet = preparedStatement.executeQuery();
+
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+
+            // Input Validation
+
+        }
+
+        return resultSet;
 
     }
 
