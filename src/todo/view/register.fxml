@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.controller.RegisterController">
+   <children>
+      <AnchorPane prefHeight="96.0" prefWidth="700.0" style="-fx-background-color: #d32f2f;">
+         <children>
+            <Label alignment="CENTER" layoutX="264.0" layoutY="22.0" prefHeight="53.0" prefWidth="172.0" text="TODO" textFill="#424242">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="registerFirstName" layoutX="230.0" layoutY="125.0" prefHeight="25.0" prefWidth="240.0" promptText="First Name" stylesheets="@../css/main.css" />
+      <JFXTextField fx:id="registerLastName" layoutX="230.0" layoutY="156.0" prefHeight="25.0" prefWidth="240.0" promptText="Last Name" stylesheets="@../css/main.css" />
+      <JFXTextField fx:id="registerUsername" layoutX="230.0" layoutY="186.0" prefHeight="25.0" prefWidth="240.0" promptText="Username" stylesheets="@../css/main.css" />
+      <JFXCheckBox fx:id="registerMaleCheckBox" layoutX="337.0" layoutY="228.0" text="Male" textFill="WHITE" />
+      <JFXCheckBox fx:id="registerFemaleCheckBox" layoutX="408.0" layoutY="228.0" text="Female" textFill="WHITE" />
+      <JFXPasswordField fx:id="registerPassword" layoutX="231.0" layoutY="256.0" prefHeight="25.0" prefWidth="240.0" promptText="Password" stylesheets="@../css/main.css" />
+      <JFXButton fx:id="registerRegisterButton" layoutX="230.0" layoutY="329.0" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: white;" text="Register" textFill="#424242">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
