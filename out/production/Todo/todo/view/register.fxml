@@ -25,7 +25,7 @@
       <JFXCheckBox fx:id="registerMaleCheckBox" layoutX="337.0" layoutY="228.0" text="Male" textFill="WHITE" />
       <JFXCheckBox fx:id="registerFemaleCheckBox" layoutX="408.0" layoutY="228.0" text="Female" textFill="WHITE" />
       <JFXPasswordField fx:id="registerPassword" layoutX="231.0" layoutY="256.0" prefHeight="25.0" prefWidth="240.0" promptText="Password" stylesheets="@../css/main.css" />
-      <JFXButton fx:id="registerRegisterButton" layoutX="230.0" layoutY="329.0" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: white;" text="Register" textFill="#424242">
+      <JFXButton fx:id="registerRegisterButton" layoutX="230.0" layoutY="307.0" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: white;" text="Register" textFill="#424242">
          <font>
             <Font size="15.0" />
          </font>
