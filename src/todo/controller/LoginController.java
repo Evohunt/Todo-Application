@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
+import todo.animations.Shaker;
 import todo.model.User;
 
 
@@ -62,7 +63,12 @@ public class LoginController {
                 }
 
                 if (counter == 1) {
-                    System.out.println("Login successful!");
+                    showAddItemScreen();
+                } else {
+                    Shaker usernameShaker = new Shaker(loginUsername);
+                    Shaker passwordShaker = new Shaker(loginPassword);
+                    usernameShaker.shake();
+                    passwordShaker.shake();
                 }
 
             } catch (SQLException e) {
@@ -88,9 +94,23 @@ public class LoginController {
 
         });
 
-
     }
 
+    private void showAddItemScreen() {
 
+        loginRegisterButton.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/todo/view/addItem.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+    }
 
 }

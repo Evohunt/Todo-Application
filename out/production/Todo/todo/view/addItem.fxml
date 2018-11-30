@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +18,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label alignment="CENTER" layoutX="251.0" layoutY="268.0" prefHeight="33.0" prefWidth="199.0" text="No Tasks for Today, yet!" textFill="WHITE">
+      <Label fx:id="noTaskLabel" alignment="CENTER" layoutX="251.0" layoutY="268.0" prefHeight="33.0" prefWidth="199.0" text="No Tasks for Today, yet!" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
@@ -26,6 +27,9 @@
          <image>
             <Image url="@../assets/icon_add.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </children>
 </AnchorPane>
