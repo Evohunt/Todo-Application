@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.controller.AddItemController">
+<AnchorPane fx:id="rootAnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.controller.AddItemController">
    <children>
       <AnchorPane prefHeight="96.0" prefWidth="700.0" style="-fx-background-color: #d32f2f;">
          <children>
@@ -18,12 +19,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label fx:id="noTaskLabel" alignment="CENTER" layoutX="251.0" layoutY="268.0" prefHeight="33.0" prefWidth="199.0" text="No Tasks for Today, yet!" textFill="WHITE">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="addAddButton" fitHeight="62.0" fitWidth="64.0" layoutX="319.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="addAddButton" fitHeight="62.0" fitWidth="64.0" layoutX="624.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/icon_add.png" />
          </image>
@@ -31,5 +27,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <JFXListView fx:id="addItemList" layoutX="130.0" layoutY="121.0" prefHeight="257.0" prefWidth="441.0" stylesheets="@../css/main.css" />
+      <Label fx:id="noTaskLabel" alignment="CENTER" layoutX="251.0" layoutY="217.0" prefHeight="33.0" prefWidth="199.0" text="No Tasks for Today, yet!" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

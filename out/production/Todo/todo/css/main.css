@@ -4,3 +4,26 @@
 	-jfx-focus-color: WHITE;
 	-jfx-unfocus-color: WHITE;
 }
+
+.jfx-list-cell:selected {
+	-fx-background-color: #3d8c91;
+}
+
+.jfx-list-cell {
+	-fx-background-insets: 0.0;
+	-fx-pref-height: 50;
+}
+
+.jfx-list-cell .jfx-rippler {
+	-fx-rippler-fill: RED;
+}
+
+.jfx-list-cell:hover {
+	-fx-background-color: #1bd79c;
+}
+
+.jfx-list-view {
+	-fx-background-insets: 0.0;
+	-fx-cell-vertical-margin: 10.0;
+	-fx-vertical-gap: 10.0;
+}

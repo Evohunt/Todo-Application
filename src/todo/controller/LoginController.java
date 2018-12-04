@@ -40,6 +40,8 @@ public class LoginController {
 
     private DatabaseHandler databaseHandler;
 
+    private static User user = new User();
+
     @FXML
     void initialize() {
 
@@ -50,7 +52,6 @@ public class LoginController {
             String loginText = loginUsername.getText().trim();
             String loginPwd = loginPassword.getText().trim();
 
-            User user = new User();
             user.setUserName(loginText);
             user.setPassword(loginPwd);
 
@@ -101,6 +102,7 @@ public class LoginController {
         loginRegisterButton.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/todo/view/addItem.fxml"));
+
         try {
             loader.load();
         } catch (IOException e) {
@@ -111,6 +113,10 @@ public class LoginController {
         stage.setScene(new Scene(root));
         stage.showAndWait();
 
+    }
+
+    public User getUser() {
+        return user;
     }
 
 }
