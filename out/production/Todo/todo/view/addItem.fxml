@@ -17,11 +17,6 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <Label fx:id="noTaskLabel" alignment="CENTER" layoutX="439.0" layoutY="36.0" prefHeight="33.0" prefWidth="199.0" text="No Tasks for Today, yet!" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
       <ImageView fx:id="addAddButton" fitHeight="62.0" fitWidth="64.0" layoutX="624.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
@@ -33,5 +28,10 @@
          </cursor>
       </ImageView>
       <JFXListView fx:id="addItemList" layoutX="130.0" layoutY="121.0" prefHeight="257.0" prefWidth="441.0" stylesheets="@../css/main.css" />
+      <Label fx:id="noTaskLabel" alignment="CENTER" layoutX="251.0" layoutY="217.0" prefHeight="33.0" prefWidth="199.0" text="No Tasks for Today, yet!" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

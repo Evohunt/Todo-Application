@@ -2,6 +2,7 @@ package todo.Database;
 
 import todo.model.User;
 import java.sql.*;
+import java.util.zip.CheckedOutputStream;
 
 public class DatabaseHandler extends Configs {
 
@@ -95,6 +96,31 @@ public class DatabaseHandler extends Configs {
         }
 
         return resultSet;
+
+    }
+
+    public void saveTaskForUser(User user, String taskName, String taskDescription) {
+
+        String query = "INSERT INTO " + Const.TASKS_TABLE + " ("
+                + Const.TASKS_TABLE + "." + Const.USERS_ID + ", "
+                + Const.TASKS_TABLE + "." + Const.TASK_NAME + ", "
+                + Const.TASKS_TABLE + "." + Const.TASKS_DESCRIPTION + ")" + " VALUES "
+                + "(" + "(" + "SELECT " + Const.USERS_TABLE + "." + Const.USERS_ID + " FROM "
+                + Const.USERS_TABLE + " WHERE " + Const.USERS_TABLE + "." + Const.USERS_USERNAME
+                + "=?), ?, ?)";
+
+
+        try {
+
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+            preparedStatement.setString(1, user.getUserName());
+            preparedStatement.setString(2, taskName);
+            preparedStatement.setString(3, taskDescription);
+            preparedStatement.execute();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
