@@ -7,14 +7,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
+import todo.animations.Shaker;
 
-public class AddItemFormController {
+public class AddItemFormController extends WindowChangeController {
 
     @FXML
     private ResourceBundle resources;
@@ -43,55 +41,35 @@ public class AddItemFormController {
 
         saveTaskButton.setOnAction(event -> {
 
-            String taskName = taskField.getText();
-            String taskDesc = taskDescription.getText();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/todo/view/login.fxml"));
-
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (taskField.getText().equals("")) {
+                Shaker shaker = new Shaker(taskField);
+                shaker.shake();
+            } else if (taskDescription.getText().equals("")) {
+                Shaker shaker = new Shaker(taskDescription);
+                shaker.shake();
+            } else {
+                String taskName = taskField.getText();
+                String taskDesc = taskDescription.getText();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/todo/view/login.fxml"));
+                try {
+                    loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                LoginController loginController = loader.getController();
+                databaseHandler.saveTaskForUser(loginController.getUser(), taskName, taskDesc);
+                showWindow(taskField, "/todo/view/addItem.fxml");
             }
-
-            LoginController loginController = loader.getController();
-
-            databaseHandler.saveTaskForUser(loginController.getUser(), taskName, taskDesc);
-
-            taskField.getScene().getWindow().hide();
-            FXMLLoader secondLoader = new FXMLLoader();
-            secondLoader.setLocation(getClass().getResource("/todo/view/addItem.fxml"));
-
-            try {
-                secondLoader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = secondLoader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
 
         });
 
         addItemBack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            taskField.getScene().getWindow().hide();
-            FXMLLoader secondLoader = new FXMLLoader();
-            secondLoader.setLocation(getClass().getResource("/todo/view/addItem.fxml"));
-
-            try {
-                secondLoader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = secondLoader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            showWindow(taskField, "/todo/view/addItem.fxml");
 
         });
 
     }
+
 }

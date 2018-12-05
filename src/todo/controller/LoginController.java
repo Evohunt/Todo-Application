@@ -3,22 +3,17 @@ package todo.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
 import todo.animations.Shaker;
 import todo.model.User;
 
 
-public class LoginController {
+public class LoginController extends WindowChangeController {
 
     @FXML
     private ResourceBundle resources;
@@ -49,74 +44,45 @@ public class LoginController {
 
         loginLoginButton.setOnAction(event -> {
 
-            String loginText = loginUsername.getText().trim();
-            String loginPwd = loginPassword.getText().trim();
+            if (loginUsername.getText().equals("")) {
+                Shaker usernameShaker = new Shaker(loginUsername);
+                usernameShaker.shake();
+            } else if (loginPassword.getText().equals("")) {
+                Shaker passwordShaker = new Shaker(loginPassword);
+                passwordShaker.shake();
+            } else {
+                String loginText = loginUsername.getText().trim();
+                String loginPwd = loginPassword.getText().trim();
 
-            user.setUserName(loginText);
-            user.setPassword(loginPwd);
+                user.setUserName(loginText);
+                user.setPassword(loginPwd);
 
-            ResultSet userRow = databaseHandler.getUser(user);
-            int counter = 0;
-            try {
+                ResultSet userRow = databaseHandler.getUser(user);
+                try {
+                    if (userRow.next()) {
+                        showWindow(loginUsername, "/todo/view/addItem.fxml");
+                    } else {
+                        Shaker usernameShaker = new Shaker(loginUsername);
+                        Shaker passwordShaker = new Shaker(loginPassword);
+                        passwordShaker.shake();
+                        usernameShaker.shake();
+                    }
 
-                while (userRow.next()) {
-                    counter++;
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-
-                if (counter == 1) {
-                    showAddItemScreen();
-                } else {
-                    Shaker usernameShaker = new Shaker(loginUsername);
-                    Shaker passwordShaker = new Shaker(loginPassword);
-                    usernameShaker.shake();
-                    passwordShaker.shake();
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
-
         });
 
         loginRegisterButton.setOnAction(event -> {
 
-            loginRegisterButton.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/todo/view/register.fxml"));
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+            showWindow(loginRegisterButton, "/todo/view/register.fxml");
 
         });
-
-    }
-
-    private void showAddItemScreen() {
-
-        loginRegisterButton.getScene().getWindow().hide();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/todo/view/addItem.fxml"));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
 
     }
 
     User getUser() {
         return user;
     }
-
 }

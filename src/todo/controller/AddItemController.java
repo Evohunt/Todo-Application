@@ -8,18 +8,15 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
 import todo.animations.Fader;
 
 
-public class AddItemController {
+public class AddItemController extends WindowChangeController {
 
     @FXML
     private ResourceBundle resources;
@@ -59,7 +56,7 @@ public class AddItemController {
         ResultSet tasks = databaseHandler.getTasksForUser(loginController.getUser());
         while (tasks.next()) {
             Label lbl = new Label(tasks.getString("task"));
-            lbl.setStyle("-fx-text-fill: WHITE; -fx-font-family: Arial; -fx-padding-bottom: 5px;");
+            lbl.setStyle("-fx-text-fill: WHITE; -fx-font-family: Arial;");
             addItemList.getItems().add(lbl);
         }
 
@@ -101,10 +98,8 @@ public class AddItemController {
             try {
 
                 AnchorPane formPane = FXMLLoader.load(getClass().getResource("/todo/view/addItemForm.fxml"));
-
                 Fader paneFader = new Fader(formPane, 0f, 1f);
                 paneFader.start();
-
                 rootAnchorPane.getChildren().setAll(formPane);
 
             } catch (IOException e) {
@@ -115,23 +110,10 @@ public class AddItemController {
 
         addItemBack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            addItemList.getScene().getWindow().hide();
-            FXMLLoader secondLoader = new FXMLLoader();
-            secondLoader.setLocation(getClass().getResource("/todo/view/login.fxml"));
-
-            try {
-                Object load = secondLoader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = secondLoader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            showWindow(addItemList, "/todo/view/login.fxml");
 
         });
 
     }
-
 
 }
