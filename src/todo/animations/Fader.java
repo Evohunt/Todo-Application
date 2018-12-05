@@ -10,7 +10,7 @@ public class Fader {
 
     public Fader (Node node, float startValue, float toValue) {
 
-        fadeTransition = new FadeTransition(Duration.millis(1500), node);
+        fadeTransition = new FadeTransition(Duration.millis(1000), node);
         fadeTransition.setFromValue(startValue);
         fadeTransition.setToValue(toValue);
         fadeTransition.setCycleCount(1);

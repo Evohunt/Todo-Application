@@ -1,29 +1,41 @@
 .jfx-text-field, .jfx-password-field {
 	-fx-text-inner-color: WHITE;
-	-fx-prompt-text-fill: WHITE;
+	-fx-prompt-text-fill: GRAY;
 	-jfx-focus-color: WHITE;
-	-jfx-unfocus-color: WHITE;
+	-jfx-unfocus-color: GRAY;
 }
 
 .jfx-list-cell:selected {
-	-fx-background-color: #3d8c91;
+	-fx-background-color: #d32f2f;
 }
 
 .jfx-list-cell {
-	-fx-background-insets: 0.0;
-	-fx-pref-height: 50;
+    -fx-text-color: WHITE;
+    -fx-font-size: 16;
+    -fx-padding: 10px;
+    -fx-background-color: #424242;
+	-fx-background-insets: 0px, 2px;
+	-fx-pref-height: 30;
+}
+
+.jfx-list-cell:empty {
+    -fx-padding: 10px ;
+    -fx-background-color: #424242 ;
+    -fx-background-insets: 0 ;
 }
 
 .jfx-list-cell .jfx-rippler {
-	-fx-rippler-fill: RED;
+	-fx-rippler-fill: WHITE;
+    -fx-rippler-color: WHITE;
 }
 
 .jfx-list-cell:hover {
-	-fx-background-color: #1bd79c;
+	-fx-background-color: #ae2525;
 }
 
 .jfx-list-view {
+    -fx-background-color: #535353;
 	-fx-background-insets: 0.0;
-	-fx-cell-vertical-margin: 10.0;
-	-fx-vertical-gap: 10.0;
+	-fx-cell-vertical-margin: 10px;
+	-fx-vertical-gap: 10px;
 }

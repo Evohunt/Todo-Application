@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootAnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="todo.controller.AddItemController">
+<AnchorPane fx:id="rootAnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.controller.AddItemController">
    <children>
       <AnchorPane prefHeight="96.0" prefWidth="700.0" style="-fx-background-color: #d32f2f;">
          <children>
-            <Label alignment="CENTER" layoutX="269.0" layoutY="20.0" prefHeight="56.0" prefWidth="162.0" text="TODO" textFill="#424242">
+            <Label alignment="CENTER" layoutX="269.0" layoutY="20.0" prefHeight="56.0" prefWidth="162.0" text="2DO" textFill="#424242">
                <font>
-                  <Font size="36.0" />
+                  <Font name="American Captain" size="45.0" />
                </font>
             </Label>
          </children>
@@ -32,6 +32,17 @@
          <image>
             <Image url="@../assets/icons_remove.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="addItemBack" fitHeight="45.0" fitWidth="45.0" layoutX="15.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/icon_back.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </children>
 </AnchorPane>

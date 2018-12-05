@@ -2,35 +2,49 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="todo.controller.AddItemFormController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.controller.AddItemFormController">
    <children>
       <JFXTextField fx:id="taskField" layoutX="191.0" layoutY="139.0" prefHeight="48.0" prefWidth="318.0" promptText="Task" stylesheets="@../css/main.css">
          <font>
-            <Font size="20.0" />
+            <Font name="Arial" size="19.0" />
          </font>
       </JFXTextField>
       <JFXTextField fx:id="taskDescription" layoutX="191.0" layoutY="205.0" prefHeight="48.0" prefWidth="318.0" promptText="Description" stylesheets="@../css/main.css">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial" size="18.0" />
          </font>
       </JFXTextField>
       <JFXButton fx:id="saveTaskButton" layoutX="284.0" layoutY="289.0" prefHeight="48.0" prefWidth="132.0" style="-fx-background-color: white;" text="Save Task" textFill="#424242">
          <font>
-            <Font size="17.0" />
+            <Font name="Calibri" size="20.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <AnchorPane prefHeight="96.0" prefWidth="700.0" style="-fx-background-color: #d32f2f;">
          <children>
-            <Label alignment="CENTER" layoutX="269.0" layoutY="20.0" prefHeight="56.0" prefWidth="162.0" text="TODO" textFill="#424242">
+            <Label alignment="CENTER" layoutX="269.0" layoutY="20.0" prefHeight="56.0" prefWidth="162.0" text="2DO" textFill="#424242">
                <font>
-                  <Font size="36.0" />
+                  <Font name="American Captain" size="45.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
+      <ImageView fx:id="addItemBack" fitHeight="45.0" fitWidth="45.0" layoutX="15.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/icon_back.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

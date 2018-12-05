@@ -8,10 +8,13 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
 import todo.animations.Fader;
 
@@ -39,31 +42,30 @@ public class AddItemController {
     private ImageView addItemRemoveButton;
 
     @FXML
+    private ImageView addItemBack;
+
+    @FXML
     void initialize() throws SQLException {
 
         databaseHandler = new DatabaseHandler();
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/todo/view/login.fxml"));
-
         try {
             loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         LoginController loginController = loader.getController();
-
         ResultSet tasks = databaseHandler.getTasksForUser(loginController.getUser());
         while (tasks.next()) {
             Label lbl = new Label(tasks.getString("task"));
+            lbl.setStyle("-fx-text-fill: WHITE; -fx-font-family: Arial; -fx-padding-bottom: 5px;");
             addItemList.getItems().add(lbl);
         }
 
         addItemRemoveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
             final int selectedItem = addItemList.getSelectionModel().getSelectedIndex();
-
             FXMLLoader tempLoader = new FXMLLoader();
             tempLoader.setLocation(getClass().getResource("/todo/view/login.fxml"));
             try {
@@ -72,7 +74,6 @@ public class AddItemController {
                 e.printStackTrace();
             }
             LoginController tempLoginController = tempLoader.getController();
-
             Label lbl = addItemList.getSelectionModel().getSelectedItem();
             String taskName = lbl.getText();
             ResultSet specificTask = databaseHandler.getTaskId(tempLoginController.getUser(), taskName);
@@ -109,6 +110,24 @@ public class AddItemController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+        });
+
+        addItemBack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+            addItemList.getScene().getWindow().hide();
+            FXMLLoader secondLoader = new FXMLLoader();
+            secondLoader.setLocation(getClass().getResource("/todo/view/login.fxml"));
+
+            try {
+                Object load = secondLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = secondLoader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
 
         });
 

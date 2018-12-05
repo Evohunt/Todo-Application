@@ -8,11 +8,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
 import todo.model.User;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RegisterController {
 
@@ -38,13 +43,30 @@ public class RegisterController {
     private JFXButton registerRegisterButton;
 
     @FXML
+    private ImageView registerBack;
+
+    @FXML
     void initialize() {
 
-        registerRegisterButton.setOnAction(event -> {
+        registerBack.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
 
-            createUser();
+            registerRegisterButton.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/todo/view/login.fxml"));
+
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
 
         });
+
+        registerRegisterButton.setOnAction(event -> createUser());
 
     }
 
@@ -84,5 +106,7 @@ public class RegisterController {
 
 
     }
+
+
 
 }

@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
 
@@ -32,6 +34,9 @@ public class AddItemFormController {
     private DatabaseHandler databaseHandler;
 
     @FXML
+    private ImageView addItemBack;
+
+    @FXML
     void initialize() {
 
         databaseHandler = new DatabaseHandler();
@@ -53,6 +58,24 @@ public class AddItemFormController {
             LoginController loginController = loader.getController();
 
             databaseHandler.saveTaskForUser(loginController.getUser(), taskName, taskDesc);
+
+            taskField.getScene().getWindow().hide();
+            FXMLLoader secondLoader = new FXMLLoader();
+            secondLoader.setLocation(getClass().getResource("/todo/view/addItem.fxml"));
+
+            try {
+                secondLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = secondLoader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        });
+
+        addItemBack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
             taskField.getScene().getWindow().hide();
             FXMLLoader secondLoader = new FXMLLoader();
