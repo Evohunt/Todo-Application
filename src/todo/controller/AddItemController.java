@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import todo.Database.DatabaseHandler;
 import todo.animations.Fader;
-import todo.model.User;
+
 
 public class AddItemController {
 
@@ -28,15 +28,15 @@ public class AddItemController {
     private ImageView addAddButton;
 
     @FXML
-    private Label noTaskLabel;
-
-    @FXML
     private AnchorPane rootAnchorPane;
 
     @FXML
     private JFXListView<Label> addItemList;
 
-    DatabaseHandler databaseHandler;
+    private DatabaseHandler databaseHandler;
+
+    @FXML
+    private ImageView addItemRemoveButton;
 
     @FXML
     void initialize() throws SQLException {
@@ -56,17 +56,46 @@ public class AddItemController {
 
         ResultSet tasks = databaseHandler.getTasksForUser(loginController.getUser());
         while (tasks.next()) {
-            addItemList.getItems().add(new Label(tasks.getString("task")));
+            Label lbl = new Label(tasks.getString("task"));
+            addItemList.getItems().add(lbl);
         }
+
+        addItemRemoveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+            final int selectedItem = addItemList.getSelectionModel().getSelectedIndex();
+
+            FXMLLoader tempLoader = new FXMLLoader();
+            tempLoader.setLocation(getClass().getResource("/todo/view/login.fxml"));
+            try {
+                tempLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            LoginController tempLoginController = tempLoader.getController();
+
+            Label lbl = addItemList.getSelectionModel().getSelectedItem();
+            String taskName = lbl.getText();
+            ResultSet specificTask = databaseHandler.getTaskId(tempLoginController.getUser(), taskName);
+            try {
+
+                while (specificTask.next()) {
+                    String taskID = specificTask.getString("taskid");
+                    databaseHandler.removeTask(taskID);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            addItemList.getItems().remove(selectedItem);
+
+        });
+
 
         addAddButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            System.out.println("Added item!");
-
             addAddButton.relocate(0, 20);
-            noTaskLabel.relocate(0, 85);
             addAddButton.setOpacity(0);
-            noTaskLabel.setOpacity(0);
 
             try {
 

@@ -115,7 +115,7 @@ public class LoginController {
 
     }
 
-    public User getUser() {
+    User getUser() {
         return user;
     }
 

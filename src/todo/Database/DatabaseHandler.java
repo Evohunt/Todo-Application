@@ -2,14 +2,14 @@ package todo.Database;
 
 import todo.model.User;
 import java.sql.*;
-import java.util.zip.CheckedOutputStream;
 
 public class DatabaseHandler extends Configs {
 
-    Connection dbConnection;
+    private Connection dbConnection;
 
     public Connection getDbConnection() throws ClassNotFoundException, SQLException {
-        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
+        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName
+                + "?autoReconnect=true&useSSL=false";
         Class.forName("com.mysql.jdbc.Driver");
         dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
         return dbConnection;
@@ -122,6 +122,48 @@ public class DatabaseHandler extends Configs {
             e.printStackTrace();
         }
 
+    }
+
+    public void removeTask(String taskId) {
+
+        String query = "DELETE FROM " + Const.TASKS_TABLE + " WHERE "
+                + Const.TASKS_TABLE + "." + Const.TASKS_ID + "=?";
+
+        try {
+
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+            preparedStatement.setString(1, taskId);
+            preparedStatement.execute();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public ResultSet getTaskId(User user, String taskName) {
+        ResultSet resultSet = null;
+
+        String query = "SELECT " + Const.TASKS_TABLE + "." + Const.TASKS_ID
+                + " FROM " + Const.TASKS_TABLE + " JOIN " + Const.USERS_TABLE + " ON "
+                + Const.USERS_TABLE + "." + Const.USERS_ID + " = "
+                + Const.TASKS_TABLE + "." + Const.USERS_ID + " AND "
+                + Const.TASKS_TABLE + "." + Const.TASK_NAME + "=?"
+                + " AND " + Const.USERS_TABLE + "." + Const.USERS_USERNAME + "=?";
+
+        try {
+
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+            preparedStatement.setString(1, taskName);
+            preparedStatement.setString(2, user.getUserName());
+            resultSet = preparedStatement.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet;
     }
 
 }

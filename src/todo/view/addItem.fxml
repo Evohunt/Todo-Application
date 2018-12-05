@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootAnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.controller.AddItemController">
+<AnchorPane fx:id="rootAnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="todo.controller.AddItemController">
    <children>
       <AnchorPane prefHeight="96.0" prefWidth="700.0" style="-fx-background-color: #d32f2f;">
          <children>
@@ -28,10 +28,10 @@
          </cursor>
       </ImageView>
       <JFXListView fx:id="addItemList" layoutX="130.0" layoutY="121.0" prefHeight="257.0" prefWidth="441.0" stylesheets="@../css/main.css" />
-      <Label fx:id="noTaskLabel" alignment="CENTER" layoutX="251.0" layoutY="217.0" prefHeight="33.0" prefWidth="199.0" text="No Tasks for Today, yet!" textFill="WHITE">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
+      <ImageView fx:id="addItemRemoveButton" fitHeight="45.0" fitWidth="45.0" layoutX="576.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/icons_remove.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

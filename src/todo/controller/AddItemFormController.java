@@ -2,7 +2,6 @@ package todo.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import todo.Database.DatabaseHandler;
-import todo.model.User;
 
 public class AddItemFormController {
 
@@ -31,7 +29,7 @@ public class AddItemFormController {
     @FXML
     private JFXButton saveTaskButton;
 
-    DatabaseHandler databaseHandler;
+    private DatabaseHandler databaseHandler;
 
     @FXML
     void initialize() {
@@ -68,7 +66,7 @@ public class AddItemFormController {
             Parent root = secondLoader.getRoot();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.showAndWait();
+            stage.show();
 
         });
 

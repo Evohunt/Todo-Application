@@ -1,19 +1,19 @@
 package todo.Database;
 
-public class Const {
-    public static final String USERS_TABLE = "users";
-    public static final String TASKS_TABLE = "tasks";
+class Const {
+    static final String USERS_TABLE = "users";
+    static final String TASKS_TABLE = "tasks";
 
     // USERS Table Column Names
-    public static final String USERS_ID = "userid";
-    public static final String USERS_FIRSTNAME = "firstName";
-    public static final String USERS_LASTNAME = "lastName";
-    public static final String USERS_PASSWORD = "password";
-    public static final String USERS_USERNAME = "username";
-    public static final String USERS_GENDER = "gender";
+    static final String USERS_ID = "userid";
+    static final String USERS_FIRSTNAME = "firstName";
+    static final String USERS_LASTNAME = "lastName";
+    static final String USERS_PASSWORD = "password";
+    static final String USERS_USERNAME = "username";
+    static final String USERS_GENDER = "gender";
 
     // TASKS Table Column Names
-    public static final String TASKS_ID = "taskid";
-    public static final String TASK_NAME = "task";
-    public static final String TASKS_DESCRIPTION = "description";
+    static final String TASKS_ID = "taskid";
+    static final String TASK_NAME = "task";
+    static final String TASKS_DESCRIPTION = "description";
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.controller.AddItemFormController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="todo.controller.AddItemFormController">
    <children>
       <JFXTextField fx:id="taskField" layoutX="191.0" layoutY="139.0" prefHeight="48.0" prefWidth="318.0" promptText="Task" stylesheets="@../css/main.css">
          <font>
